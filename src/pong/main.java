@@ -32,25 +32,25 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-       // Declaramos dimensiones de pantalla de 800 x 600 px y color de fondo negro, titulo.
-       Pane root = new Pane();
-       Scene scene = new Scene(root, 800, 600, Color.BLACK);
-       primaryStage.setTitle("PongFX");
-       primaryStage.setScene(scene);
-       primaryStage.show(); 
+        // Declaramos dimensiones de pantalla de 800 x 600 px y color de fondo negro, titulo.
+        Pane root = new Pane();
+        Scene scene = new Scene(root, 800, 600, Color.BLACK);
+        primaryStage.setTitle("PongFX");
+        primaryStage.setScene(scene);
+        primaryStage.show(); 
       
-       // Creamos el objeto clase de la Bola, Tamaño, Posicón y color.
-       Circle circleBall = new Circle(ballCenterX, ballCenterY, 7, Color.WHITE);
-       root.getChildren().add(circleBall);
+        // Creamos el objeto clase de la Bola, Tamaño, Posicón y color.
+        Circle circleBall = new Circle(ballCenterX, ballCenterY, 7, Color.WHITE);
+        root.getChildren().add(circleBall);
        
-       // Creamos la clase animación para el Movimiento de la bola.
-       AnimationTimer animationBall = null;
-       animationBall = new AnimationTimer(){
+        // Creamos el objeto clase del Rectangulo.
+        Rectangle rectStick = new Rectangle(500, stickPosY, 7, 50);
+        rectStick.setFill(Color.WHITE);
+        root.getChildren().add(rectStick);
        
-       // Creamos el objeto clase del Rectangulo.
-       Rectangle rectStick = new Rectangle(500, stickPosY, 7, 50);
-       rectStick.setFill(Color.WHITE);
-       root.getChildren().add(rectStick);
+        // Creamos la clase animación para el Movimiento de la bola.
+        AnimationTimer animationBall = null;
+        animationBall = new AnimationTimer(){
        
             @Override
             public void handle(long now) {
