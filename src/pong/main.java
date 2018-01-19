@@ -1,9 +1,11 @@
-/**
+/*
+ *
  * @author Tomás Dominguez Gómez
  * 1º DAW - Programación. 
  * 2º Trimestre | Curso 2017/18.
  * IES Ntra. Sra. Los Remedios. 
  * Ubrique (Cádiz).
+ * 
  */
 package pong;
 
@@ -17,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-
 
 public class main extends Application {
   
@@ -99,7 +100,6 @@ public class main extends Application {
                 }
                 rectStick.setY(stickPosY);
             };
-                
         };
         
         // Comienza la sentencia de los controles.
