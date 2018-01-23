@@ -17,9 +17,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Pos;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class main extends Application {
@@ -43,6 +48,9 @@ public class main extends Application {
     
     // Declaramos la variable de la posición Y de la pala stick.
     int stickCurrentSpeed = 0;
+    
+    // Declaramos la variable Texto.
+    final int TEXT_SIZE = 30;
     
     @Override
     public void start(Stage primaryStage) {
@@ -74,10 +82,55 @@ public class main extends Application {
         // Creamos la clase animación para el Movimiento de la bola.
         AnimationTimer animationBall = null;
         animationBall = new AnimationTimer(){
-
+            
             @Override
             public void handle(long now) {
+        
+        // Creamos los marcadores de máxima puntuación y la puntuación de partida.
+        // Creamos el primer LAYOUTS.
+                HBox paneScores = new HBox();
+                paneScores.setTranslateY(20);
+                paneScores.setMinWidth(SCENES_TAM_X);
+                paneScores.setAlignment(Pos.CENTER);
+                paneScores.setSpacing(0);
+                root.getChildren().add(paneScores);
                 
+        // Creamos el segundo LAYOUTS para la puntuación de partida.
+                HBox paneCurrentScores = new HBox();
+                paneCurrentScores.setSpacing(25);
+                paneScores.getChildren().add(paneCurrentScores);
+        
+        // Creamos el tercer LAYOUTS para la puntuación máxima de partida.
+                HBox paneHighScores = new HBox();
+                paneHighScores.setSpacing(25);
+                paneScores.getChildren().add(paneHighScores);
+        
+        // Creamos la Etiqueta texto para la puntuación de partida.
+                Text textTitleScore = new Text("Puntuación:");
+                textTitleScore.setFont(Font.font(TEXT_SIZE));
+                textTitleScore.setFill(Color.WHITE);
+        
+        // Creamos el Resultado de la puntuación de partida.
+                Text textScore = new Text("0");
+                textScore.setFont(Font.font(TEXT_SIZE));
+                textScore.setFill(Color.WHITE);
+        
+        // Creamos la Etiqueta para Máxima Puntuación.
+                Text textTitleMaxScore = new Text("Max.Puntuación:");
+                textTitleMaxScore.setFont(Font.font(TEXT_SIZE));
+                textTitleMaxScore.setFill(Color.WHITE);
+        
+        // Creamos el Resultado de la puntación de Max Puntuación.
+                Text textMaxScore = new Text("0");
+                textMaxScore.setFont(Font.font(TEXT_SIZE));
+                textMaxScore.setFill(Color.WHITE);
+        
+        // Añadimos los textos a los LAYOUTS reservados para ellos.
+                paneCurrentScores.getChildren().add(textTitleScore);
+                paneCurrentScores.getChildren().add(textScore);
+                paneCurrentScores.getChildren().add(textTitleMaxScore);
+                paneCurrentScores.getChildren().add(textMaxScore);
+             
         // Sentencia dentro de handle de la colisión.
                 Shape shapeColision = Shape.intersect(circleBall, rectStick);
                 boolean colisionVacia = shapeColision.getBoundsInLocal().isEmpty();
