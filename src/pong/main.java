@@ -17,8 +17,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 
 public class main extends Application {
   
@@ -60,13 +61,34 @@ public class main extends Application {
         Rectangle rectStick = new Rectangle(SCENES_TAM_X*0.95, stickPosY, STICK_WIDTH, STICK_HEIGHT);
         rectStick.setFill(Color.WHITE);
         root.getChildren().add(rectStick);
+        
+        // Creamos las lineas de nuetra mesa de juego Red y Linea Horizontal.
+        for(int i=0; i<SCENES_TAM_Y; i+=30){
+            Line line = new Line(SCENES_TAM_X/2, i, SCENES_TAM_X/2, i+10);
+            line.setStroke(Color.WHITE);
+            line.setStrokeWidth(4);
+            root.getChildren().add(line);
+        };
+        
+        Line lineH = new Line(SCENES_TAM_X, 600, SCENES_TAM_X, 0);
+        lineH.setStroke(Color.GREY);
+        lineH.setStrokeWidth(1);
+        root.getChildren().add(lineH);
        
         // Creamos la clase animación para el Movimiento de la bola.
         AnimationTimer animationBall = null;
         animationBall = new AnimationTimer(){
-       
+
             @Override
             public void handle(long now) {
+                
+        // Sentencia dentro de handle de la colisión.
+                Shape shapeColision = Shape.intersect(circleBall, rectStick);
+                boolean colisionVacia = shapeColision.getBoundsInLocal().isEmpty();
+                    if(colisionVacia == false){
+                        //Colisión detectada. Mover Bola hacia la izquierda
+                        ballCurrentSpeedX = -3;
+                    }
                 
         // Comineza la sentencia de la animación de la bola.
                 circleBall.setCenterX(ballCenterX);
@@ -86,6 +108,7 @@ public class main extends Application {
                 if(ballCenterY <= 0) {
                     ballCurrentSpeedY = 3;
                 }
+                
         // Comineza la sentencia de la playa stick.
                 stickPosY += stickCurrentSpeed;
                 if(stickPosY < 0){
@@ -102,8 +125,7 @@ public class main extends Application {
             };
         };
         
-        // Comienza la sentencia de los controles.
-        // Con esta sentencia responde el movimiento al pulsar las teclas.
+        // Comienza la sentencia de los controles. Responde el movimiento al pulsar las teclas.
         scene.setOnKeyPressed((KeyEvent event) -> {
             switch(event.getCode()){
                 case UP:
@@ -120,13 +142,10 @@ public class main extends Application {
         // Con esta sentencia se para el movimiento al dejar de pulsar las teclas.
         scene.setOnKeyReleased((KeyEvent event) -> {
             // No se pulsa ninguna tecla.
-            stickCurrentSpeed = 0;
-            
+            stickCurrentSpeed = 0;  
         });
 
         // Cominezo de la Animación de la bola del juego.
         animationBall.start();
     };
-
- 
 }
