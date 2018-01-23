@@ -20,6 +20,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 
 public class main extends Application {
   
@@ -70,11 +71,6 @@ public class main extends Application {
             root.getChildren().add(line);
         };
         
-        Line lineH = new Line(SCENES_TAM_X, 600, SCENES_TAM_X, 0);
-        lineH.setStroke(Color.GREY);
-        lineH.setStrokeWidth(1);
-        root.getChildren().add(lineH);
-       
         // Creamos la clase animación para el Movimiento de la bola.
         AnimationTimer animationBall = null;
         animationBall = new AnimationTimer(){
