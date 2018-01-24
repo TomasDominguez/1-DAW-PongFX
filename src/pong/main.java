@@ -50,7 +50,13 @@ public class main extends Application {
     int stickCurrentSpeed = 0;
     
     // Declaramos la variable Texto.
-    final int TEXT_SIZE = 30;
+    int TEXT_SIZE = 20;
+    
+    // Declaramos la variable score para la suma de puntos.
+    int score;
+    
+    // Declaramos la variable máxima puntuación.
+    int highScore;
     
     @Override
     public void start(Stage primaryStage) {
@@ -106,22 +112,22 @@ public class main extends Application {
                 paneScores.getChildren().add(paneHighScores);
         
         // Creamos la Etiqueta texto para la puntuación de partida.
-                Text textTitleScore = new Text("Puntuación:");
+                Text textTitleScore = new Text("SCORE:");
                 textTitleScore.setFont(Font.font(TEXT_SIZE));
                 textTitleScore.setFill(Color.WHITE);
         
         // Creamos el Resultado de la puntuación de partida.
-                Text textScore = new Text("0");
+                Text textScore = new Text(String.valueOf(score));
                 textScore.setFont(Font.font(TEXT_SIZE));
-                textScore.setFill(Color.WHITE);
-        
+                textScore.setFill(Color.WHITE); 
+       
         // Creamos la Etiqueta para Máxima Puntuación.
-                Text textTitleMaxScore = new Text("Max.Puntuación:");
+                Text textTitleMaxScore = new Text("MAX SCORE:");
                 textTitleMaxScore.setFont(Font.font(TEXT_SIZE));
                 textTitleMaxScore.setFill(Color.WHITE);
         
         // Creamos el Resultado de la puntación de Max Puntuación.
-                Text textMaxScore = new Text("0");
+                Text textMaxScore = new Text(String.valueOf(highScore));
                 textMaxScore.setFont(Font.font(TEXT_SIZE));
                 textMaxScore.setFill(Color.WHITE);
         
@@ -134,9 +140,12 @@ public class main extends Application {
         // Sentencia dentro de handle de la colisión.
                 Shape shapeColision = Shape.intersect(circleBall, rectStick);
                 boolean colisionVacia = shapeColision.getBoundsInLocal().isEmpty();
-                    if(colisionVacia == false){
+                    if(colisionVacia == false && ballCurrentSpeedX > 0){
                         //Colisión detectada. Mover Bola hacia la izquierda
                         ballCurrentSpeedX = -3;
+                        // Incrememntamos la puntuación actual.
+                        score++;
+                        textScore.setText(String.valueOf(score));
                     }
                 
         // Comineza la sentencia de la animación de la bola.
