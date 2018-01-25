@@ -65,23 +65,35 @@ public class main extends Application {
     Text textMaxScore;
     Text textTitleMaxScore;
     
-    // Declaramos el metodo de reinicio del Juego.
-        private void resetGame(){
-            score = 0;
-            textScore.setText(String.valueOf(score));
-            ballCenterX = 10;
-            ballCurrentSpeedY = 3;
-    // Posicion de inicio de bola aleatoria en el eje Y.
-            Random random = new Random();
-            ballCenterY = random.nextInt(SCENES_TAM_Y);
-        }
-       
+    // Declaramos la variable root con Pane.
+    Pane root;
     
+    // Declaramos el metodo de reinicio del Juego.
+    private void resetGame(){
+        score = 0;
+        textScore.setText(String.valueOf(score));
+        ballCenterX = 10;
+        ballCurrentSpeedY = 3;
+        // Posicion de inicio de bola aleatoria en el eje Y.
+        Random random = new Random();
+        ballCenterY = random.nextInt(SCENES_TAM_Y);
+    }
+    
+    // Declaramos el metodo para la red.
+    private void drawNet(int portionHeight, int portionWidth, int portionSpacing){    
+        for(int i=0; i<SCENES_TAM_Y; i+=portionSpacing) {
+            Line line = new Line(SCENES_TAM_X/2, i, SCENES_TAM_X/2, i+portionHeight);
+            line.setStroke(Color.WHITE);
+            line.setStrokeWidth(portionWidth);
+            root.getChildren().add(line);
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
 
         // Declaramos dimensiones de pantalla de 800 x 600 px y color de fondo negro, titulo.
-        Pane root = new Pane();
+        root = new Pane();
         Scene scene = new Scene(root, SCENES_TAM_X, SCENES_TAM_Y, Color.BLACK);
         primaryStage.setTitle("PongFX");
         primaryStage.setScene(scene);
@@ -95,19 +107,14 @@ public class main extends Application {
         Rectangle rectStick = new Rectangle(SCENES_TAM_X*0.95, stickPosY, STICK_WIDTH, STICK_HEIGHT);
         rectStick.setFill(Color.WHITE);
         root.getChildren().add(rectStick);
-        
-        // Creamos las lineas de nuetra mesa de juego Red y Linea Horizontal.
-        for(int i=0; i<SCENES_TAM_Y; i+=30){
-            Line line = new Line(SCENES_TAM_X/2, i, SCENES_TAM_X/2, i+10);
-            line.setStroke(Color.WHITE);
-            line.setStrokeWidth(4);
-            root.getChildren().add(line);
-        };
+
+        // Llama metodo Red.
+        drawNet(20, 6, 40);
         
         // Creamos los marcadores de máxima puntuación y la puntuación de partida.
         // Creamos el primer LAYOUTS.
         HBox paneScores = new HBox();
-        paneScores.setTranslateY(10);
+        paneScores.setTranslateY(20);
         paneScores.setMinWidth(SCENES_TAM_X);
         paneScores.setAlignment(Pos.CENTER);
         paneScores.setSpacing(0);
