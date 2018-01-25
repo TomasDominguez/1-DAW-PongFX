@@ -114,7 +114,7 @@ public class main extends Application {
         // Creamos los marcadores de máxima puntuación y la puntuación de partida.
         // Creamos el primer LAYOUTS.
         HBox paneScores = new HBox();
-        paneScores.setTranslateY(20);
+        paneScores.setTranslateY(10);
         paneScores.setMinWidth(SCENES_TAM_X);
         paneScores.setAlignment(Pos.CENTER);
         paneScores.setSpacing(0);
@@ -127,11 +127,11 @@ public class main extends Application {
         
         // Creamos el tercer LAYOUTS para la puntuación máxima de partida.
         HBox paneHighScores = new HBox();
-        paneHighScores.setSpacing(60);
+        paneHighScores.setSpacing(10);
         paneScores.getChildren().add(paneHighScores);
         
         // Creamos la Etiqueta texto para la puntuación de partida.
-        textTitleScore = new Text("SCORE:");
+        textTitleScore = new Text("PUNTOS:");
         textTitleScore.setFont(Font.font(TEXT_SIZE));
         textTitleScore.setFill(Color.WHITE);
         
@@ -141,7 +141,7 @@ public class main extends Application {
         textScore.setFill(Color.WHITE); 
        
         // Creamos la Etiqueta para Máxima Puntuación.
-        textTitleMaxScore = new Text("MAX SCORE:");
+        textTitleMaxScore = new Text("MAX PUNTOS:");
         textTitleMaxScore.setFont(Font.font(TEXT_SIZE));
         textTitleMaxScore.setFill(Color.WHITE);
         
